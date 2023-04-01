@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import filedialog
 from colorama import Fore
-#from XML import XML
+from XML import XML
 #import os
 #import webbrowser
 
@@ -14,6 +14,7 @@ class Main:
         self.compuesto_seleccionado = False  # -----> variable para seleccionar un compuesto
         self.maquina_seleccionada = False  # -----> variable para seleccionar una maquina
         self.salir = False  # -----> Variable para finalizar el programa
+        self.archivo = XML()
 
     def menu_principal(self):  # -----> Metodo para mostrar el menu principal
         while not self.salir:  # -----> Mientras self.salir sea = False...
@@ -74,7 +75,7 @@ class Main:
             print('                                         ')
             print(Fore.RED + '--> No se cargo ningun archivo')
         else:
-            #self.archivo.leer_xml(self.ruta)
+            self.archivo.leer_xml(self.ruta)
             print('                                         ')
             print(Fore.CYAN + '--> Archivo cargado con exito')
         ventana.mainloop()
