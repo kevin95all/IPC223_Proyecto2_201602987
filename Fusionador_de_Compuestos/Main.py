@@ -2,8 +2,8 @@ from tkinter import *
 from tkinter import filedialog
 from colorama import Fore
 from XML import XML
-#import os
-#import webbrowser
+#  import os
+#  import webbrowser
 
 
 class Main:
@@ -11,8 +11,7 @@ class Main:
     def __init__(self):
         self.ruta = ''  # -----> Guarda la dirección del archivo XML
         self.op = ''  # -----> Guarda la opción seleccionada del menú
-        self.compuesto_seleccionado = False  # -----> variable para seleccionar un compuesto
-        self.maquina_seleccionada = False  # -----> variable para seleccionar una maquina
+        self.compuesto_analizado = False  # -----> Variable para analizar el compuesto
         self.salir = False  # -----> Variable para finalizar el programa
         self.archivo = XML()
 
@@ -23,9 +22,9 @@ class Main:
             print(Fore.GREEN + '|                                        |')
             print(Fore.GREEN + '|       1)   Reiniciar sistema           |')
             print(Fore.GREEN + '|       2)   Cargar archivo              |')
-            print(Fore.GREEN + '|       3)   Gestion de elementos        |')
-            print(Fore.GREEN + '|       4)   Gestion de maquinas         |')
-            print(Fore.GREEN + '|       5)   Gestion de compuestos       |')
+            print(Fore.GREEN + '|       3)   Gestión de elementos        |')
+            print(Fore.GREEN + '|       4)   Gestión de maquinas         |')
+            print(Fore.GREEN + '|       5)   Gestión de compuestos       |')
             print(Fore.GREEN + '|       6)   Generar XML                 |')
             print(Fore.GREEN + '|       7)   Ayuda                       |')
             print(Fore.GREEN + '|       8)   Finalizar programa          |')
@@ -81,13 +80,93 @@ class Main:
         ventana.mainloop()
 
     def gestionar_elementos(self):
-        pass
+        if self.ruta == '':
+            print('                                              ')
+            print(Fore.RED + '--> No se ha cargado ningun archivo')
+        else:
+            salir = False
+
+            while not salir:
+                print('                                                     ')
+                print(Fore.GREEN + '┌---------Gestión de elementos---------┐')
+                print(Fore.GREEN + '|                                      |')
+                print(Fore.GREEN + '|        1)   Mostrar elementos        |')
+                print(Fore.GREEN + '|        2)   Agregar elemento         |')
+                print(Fore.GREEN + '|        3)   Finalizar                |')
+                print(Fore.GREEN + '|                                      |')
+                print(Fore.GREEN + '└--------------------------------------┘')
+                print('                                                     ')
+
+                op = input(Fore.CYAN + '--> Ingrese una opción: ')
+
+                if op == '1':
+                    self.archivo.mostrar_elementos()
+                elif op == '2':
+                    self.archivo.agregar_elementos()
+                elif op == '3':
+                    salir = True
+                else:
+                    print('                               ')
+                    print(Fore.RED + '--> Opción no valida')
 
     def gestionar_maquinas(self):
-        pass
+        if self.ruta == '':
+            print('                                              ')
+            print(Fore.RED + '--> No se ha cargado ningun archivo')
+        else:
+            salir = False
+
+            while not salir:
+                print('                                                     ')
+                print(Fore.GREEN + '┌----------Gestión de máquinas---------┐')
+                print(Fore.GREEN + '|                                      |')
+                print(Fore.GREEN + '|        1)   Mostrar máquinas         |')
+                print(Fore.GREEN + '|        2)   Finalizar                |')
+                print(Fore.GREEN + '|                                      |')
+                print(Fore.GREEN + '└--------------------------------------┘')
+                print('                                                     ')
+
+                op = input(Fore.CYAN + '--> Ingrese una opción: ')
+
+                if op == '1':
+                    self.archivo.mostrar_maquinas()
+                elif op == '2':
+                    salir = True
+                else:
+                    print('                               ')
+                    print(Fore.RED + '--> Opción no valida')
 
     def gestionar_compuestos(self):
-        pass
+        if self.ruta == '':
+            print('                                              ')
+            print(Fore.RED + '--> No se ha cargado ningun archivo')
+        else:
+            salir = False
+
+            while not salir:
+                print('                                                     ')
+                print(Fore.GREEN + '┌---------Gestión de compuesto---------┐')
+                print(Fore.GREEN + '|                                      |')
+                print(Fore.GREEN + '|        1)   Mostrar compuestos       |')
+                print(Fore.GREEN + '|        2)   Analizar compuesto       |')
+                print(Fore.GREEN + '|        3)   Finalizar                |')
+                print(Fore.GREEN + '|                                      |')
+                print(Fore.GREEN + '└--------------------------------------┘')
+                print('                                                     ')
+
+                op = input(Fore.CYAN + '--> Ingrese una opción: ')
+
+                if op == '1':
+                    self.archivo.mostrar_compuestos()
+                elif op == '2':
+                    compuesto = self.archivo.seleccionar_compuesto()
+                    maquina = self.archivo.seleccionar_maquina()
+                    self.compuesto_analizado = True
+                elif op == '3':
+                    salir = True
+                else:
+                    print('                               ')
+                    print(Fore.RED + '--> Opción no valida')
 
     def generar_xml(self):
         pass
@@ -100,8 +179,7 @@ class Main:
         print(Fore.RED + '--> Programa finalizado')
         self.ruta = ''
         self.op = ''
-        self.compuesto_seleccionado = False
-        self.maquina_seleccionada = False
+        self.compuesto_analizado = False
         self.salir = True
 
 
